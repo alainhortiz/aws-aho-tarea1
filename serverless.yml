@@ -7,6 +7,7 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-dynamodb-local
 
 functions:
   api:
@@ -15,3 +16,15 @@ functions:
       - httpApi:
           path: /
           method: get
+  getItems:
+    handler: ./src/list.getItems
+    events: # Que eventos se pueden realizar
+      - httpApi: # Eventos tipos http
+          path: /items/ # Path de acceso al evento
+          method: get # Metodo que acepta el evento http
+  createItem:
+    handler: ./src/create.createItem
+    events:
+      - httpApi:
+          path: /item/
+          method: post
